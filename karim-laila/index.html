@@ -29,6 +29,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            letter-spacing: normal !important; /* CRITICAL: Remove letter-spacing for Arabic */
         }
 
         body {
@@ -71,7 +72,6 @@
             font-size: 1.2rem;
             margin-bottom: 2.5rem;
             color: var(--dark-gold);
-            letter-spacing: 1px;
             font-weight: 400;
             opacity: 0.8;
         }
@@ -110,11 +110,14 @@
             to { transform: rotate(360deg); }
         }
 
+        /* FIX: Initials rendering */
         .initials {
             font-size: 3rem;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1.5; /* Vertical clearance */
+            padding: 10px; /* Prevent clipping */
         }
 
         .tap-text {
@@ -156,6 +159,7 @@
             box-shadow: var(--soft-shadow);
             position: relative;
             z-index: 10;
+            overflow: visible; /* Ensure nothing is cut */
         }
 
         .card-border {
@@ -169,21 +173,23 @@
             opacity: 0.3;
         }
 
+        /* FIX: Names Rendering and Clipping */
         .hero-names {
             font-size: 4.5rem;
-            margin-bottom: 1.5rem;
+            margin: 1rem 0;
             color: var(--text);
-            line-height: 1.1;
+            line-height: 1.6; /* Increased for Arabic diacritics and ascenders/descenders */
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            padding: 15px 0; /* Vertical breathing room */
+            display: block;
         }
 
         .hero-date {
             font-size: 1.4rem;
             color: var(--dark-gold);
             font-weight: 300;
-            letter-spacing: 2px;
         }
 
         /* --- 3. SCROLL INDICATOR --- */
@@ -227,7 +233,7 @@
             100% { transform: translateY(100%); }
         }
 
-        /* --- 4. LUXURY COUNTDOWN UI --- */
+        /* --- 4. COUNTDOWN --- */
         .section-padding {
             padding: 120px 20px;
         }
@@ -239,42 +245,21 @@
         }
 
         .countdown-title {
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             font-size: 2.2rem;
             color: var(--text);
+            line-height: 1.5;
         }
 
         .timer {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 40px;
             flex-wrap: wrap;
         }
 
         .timer-item {
-            min-width: 110px;
-            background: white;
-            border: 1px solid rgba(197, 160, 89, 0.25);
-            padding: 25px 15px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .timer-item::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at top right, rgba(241, 210, 153, 0.1), transparent);
-            pointer-events: none;
-        }
-
-        .timer-item:hover {
-            transform: translateY(-8px);
-            border-color: var(--gold);
-            box-shadow: 0 15px 40px rgba(197, 160, 89, 0.12);
+            min-width: 100px;
         }
 
         .timer-item span {
@@ -282,27 +267,14 @@
             font-size: 3.5rem;
             font-family: 'Amiri', serif;
             color: var(--dark-gold);
-            line-height: 1;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        /* Micro-animation class for number changes */
-        .number-tick {
-            animation: tickFade 0.4s ease-out;
-        }
-
-        @keyframes tickFade {
-            0% { transform: scale(0.9); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 1; }
+            line-height: 1.2;
         }
 
         .timer-label {
             font-size: 0.9rem;
-            color: #888;
-            margin-top: 12px;
+            color: #777;
+            margin-top: 10px;
             font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
         }
 
         /* --- 5. STORY SECTION --- */
@@ -316,6 +288,7 @@
             font-size: 3rem;
             margin-bottom: 80px;
             position: relative;
+            line-height: 1.5;
         }
 
         .section-title::after {
@@ -350,7 +323,7 @@
             content: '';
             position: absolute;
             right: -65px;
-            top: 10px;
+            top: 15px;
             width: 12px;
             height: 12px;
             background: var(--gold);
@@ -362,12 +335,14 @@
             font-size: 1.8rem;
             margin-bottom: 15px;
             color: var(--dark-gold);
+            line-height: 1.4;
         }
 
         .milestone p {
             font-size: 1.1rem;
             color: #555;
             max-width: 700px;
+            line-height: 1.8;
         }
 
         /* --- 6. WHEN & WHERE --- */
@@ -388,26 +363,11 @@
             position: relative;
         }
 
-        .event-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-            border-color: var(--gold);
-        }
-
         .event-card h3 {
             margin-bottom: 25px;
             font-size: 2.2rem;
             color: var(--dark-gold);
-        }
-
-        .event-card p {
-            margin-bottom: 12px;
-            font-size: 1.05rem;
-        }
-
-        .event-card strong {
-            color: var(--text);
-            font-size: 1.2rem;
+            line-height: 1.4;
         }
 
         /* --- 7. MAP --- */
@@ -420,42 +380,13 @@
             overflow: hidden;
         }
 
-        .map-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            color: white;
-            font-size: 1.3rem;
-            z-index: 5;
-            backdrop-filter: blur(2px);
-            transition: opacity 0.5s ease;
-        }
-
-        .map-container:hover .map-overlay {
-            opacity: 0;
-        }
-
-        /* --- 8. MOMENTS (GALLERY) --- */
+        /* --- 8. MOMENTS --- */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
-        }
-
-        .gallery-item {
-            overflow: hidden;
-            position: relative;
-            border-radius: 2px;
-            box-shadow: var(--soft-shadow);
         }
 
         .gallery-item img {
@@ -465,36 +396,13 @@
             transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .caption {
-            text-align: center;
-            margin-top: 30px;
-            font-family: 'Amiri', serif;
-            font-size: 1.4rem;
-            font-style: italic;
-            color: var(--dark-gold);
-        }
-
-        /* --- 9. FAQ SECTION --- */
-        .faq-container {
-            max-width: 750px;
-            margin: 0 auto;
-        }
-
+        /* --- 9. FAQ --- */
         .accordion-item {
             background: white;
             border: var(--luxury-border);
             margin-bottom: 15px;
             padding: 25px 30px;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .accordion-item:hover {
-            border-color: var(--gold);
         }
 
         .question {
@@ -503,52 +411,10 @@
             align-items: center;
             font-weight: 600;
             font-size: 1.15rem;
-            color: var(--text);
+            line-height: 1.5;
         }
 
-        .question span {
-            color: var(--gold);
-            font-size: 1.5rem;
-            transition: transform 0.4s ease;
-        }
-
-        .accordion-item.active span {
-            transform: rotate(45deg);
-        }
-
-        .answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0, 1, 0, 1);
-            color: #666;
-            padding-top: 0;
-            font-size: 1rem;
-        }
-
-        .accordion-item.active .answer {
-            max-height: 200px;
-            padding-top: 20px;
-            transition: all 0.5s cubic-bezier(1, 0, 1, 0);
-        }
-
-        /* --- 10. FOOTER --- */
-        footer {
-            padding: 100px 20px;
-            text-align: center;
-            background: white;
-            border-top: var(--luxury-border);
-        }
-
-        .footer-logo {
-            font-size: 2.8rem;
-            color: var(--gold);
-            margin-bottom: 25px;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* UPGRADED CINEMATIC HEARTS */
+        /* --- HEARTS ANIMATION --- */
         .heart {
             position: fixed;
             color: #C5A059;
@@ -556,28 +422,18 @@
             z-index: 9999;
             user-select: none;
             will-change: transform, opacity;
-            animation: cinematicFloat linear forwards;
+            animation: floatUp linear forwards;
         }
 
-        @keyframes cinematicFloat {
-            0% {
-                transform: translate3d(0, 15vh, 0) rotate(0deg) scale(0.6);
-                opacity: 0;
-            }
-            15% {
-                opacity: var(--max-opacity);
-            }
-            100% {
-                transform: translate3d(var(--drift), -115vh, 0) rotate(var(--rot)) scale(var(--scale));
-                opacity: 0;
-            }
+        @keyframes floatUp {
+            0% { transform: translate3d(0, 10vh, 0) scale(0.5) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.7; }
+            100% { transform: translate3d(var(--drift), -110vh, 0) scale(1.2) rotate(var(--rot)); opacity: 0; }
         }
 
         @media (max-width: 768px) {
-            .hero-names { font-size: 3rem; }
-            .timer { gap: 15px; }
-            .timer-item { min-width: 80px; padding: 15px 10px; }
-            .timer-item span { font-size: 2.4rem; }
+            .hero-names { font-size: 3.2rem; line-height: 1.5; padding: 10px 0; }
+            .timer-item span { font-size: 2.5rem; }
             .section-padding { padding: 80px 20px; }
         }
     </style>
@@ -597,11 +453,10 @@
 <section class="hero">
     <div class="luxury-card" data-aos="fade-up" data-aos-duration="1500">
         <div class="card-border"></div>
-        <p style="letter-spacing: 5px; margin-bottom: 25px; font-weight: 500; color: var(--gold);">موعدنا المنتظر</p>
+        <p style="margin-bottom: 25px; font-weight: 500; color: var(--gold);">موعدنا المنتظر</p>
         <h1 class="hero-names">ليلى & كريم</h1>
         <p class="hero-date">٠٢ مايو ٢٠٢٦</p>
     </div>
-
     <div class="scroll-indicator">
         <p class="scroll-text">اكتشف التفاصيل</p>
         <div class="scroll-line"></div>
@@ -611,22 +466,10 @@
 <section class="section-padding countdown-container">
     <h2 class="countdown-title" data-aos="fade-up">نعد الأيام لنبدأ رحلة العمر معاً</h2>
     <div class="timer" data-aos="fade-up" data-aos-delay="200">
-        <div class="timer-item">
-            <span id="days">٠</span>
-            <p class="timer-label">أيام</p>
-        </div>
-        <div class="timer-item">
-            <span id="hours">٠</span>
-            <p class="timer-label">ساعات</p>
-        </div>
-        <div class="timer-item">
-            <span id="minutes">٠</span>
-            <p class="timer-label">دقائق</p>
-        </div>
-        <div class="timer-item">
-            <span id="seconds">٠</span>
-            <p class="timer-label">ثواني</p>
-        </div>
+        <div class="timer-item"><span id="days">٠</span><p class="timer-label">أيام</p></div>
+        <div class="timer-item"><span id="hours">٠</span><p class="timer-label">ساعات</p></div>
+        <div class="timer-item"><span id="minutes">٠</span><p class="timer-label">دقائق</p></div>
+        <div class="timer-item"><span id="seconds">٠</span><p class="timer-label">ثواني</p></div>
     </div>
 </section>
 
@@ -666,218 +509,106 @@
             <p>القاعة الكبرى، فندق فور سيزونز نايل بلازا</p>
         </div>
     </div>
-
     <div class="map-container" data-aos="fade-up">
-        <div class="map-overlay">استخدم إصبعين لتحريك الخريطة واستكشاف الموقع</div>
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.004944967399!2d31.23126937554867!3d30.0367375749247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458409079a4051b%3A0xe10398647895e691!2sFour%20Seasons%20Hotel%20Cairo%20at%20Nile%20Plaza!5e0!3m2!1sen!2seg!4v1714498000000!5m2!1sen!2seg" 
-            width="100%" height="100%" style="border:0; filter: grayscale(0.3) sepia(0.2);" allowfullscreen="" loading="lazy"></iframe>
+        <div class="map-overlay" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.1); pointer-events:none; color:white; font-size:1.3rem; z-index:5;">استخدم إصبعين لتحريك الخريطة</div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.6493976822293!2d31.23192087541624!3d30.04015697492651!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840939527ecb3%3A0x63351ec8f7000dfb!2sFour%20Seasons%20Hotel%20Cairo%20at%20Nile%20Plaza!5e0!3m2!1sen!2seg!4v1714480000000!5m2!1sen!2seg" width="100%" height="100%" style="border:0; filter: grayscale(0.3) sepia(0.2);" allowfullscreen="" loading="lazy"></iframe>
     </div>
 </section>
 
 <section class="section-padding">
     <h2 class="section-title" data-aos="fade-up">أجمل اللحظات</h2>
     <div class="gallery-grid">
-        <div class="gallery-item" data-aos="fade-up">
-            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800" alt="لحظة حب">
-        </div>
-        <div class="gallery-item" data-aos="fade-up" data-aos-delay="150">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="لحظة سعادة">
-        </div>
-        <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
-            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=800" alt="لحظة وفاء">
-        </div>
+        <div class="gallery-item" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800" alt="لحظة حب"></div>
+        <div class="gallery-item" data-aos="fade-up" data-aos-delay="150"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="لحظة سعادة"></div>
+        <div class="gallery-item" data-aos="fade-up" data-aos-delay="300"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=800" alt="لحظة وفاء"></div>
     </div>
     <p class="caption" data-aos="fade-in">"في حضوركم تكتمل فرحتنا، وفي عيونكم نرى مباركة القدر"</p>
 </section>
 
 <section class="section-padding" style="background: var(--beige);">
     <h2 class="section-title" data-aos="fade-up">دليل الحضور</h2>
-    <div class="faq-container">
+    <div class="faq-container" style="max-width:750px; margin:0 auto;">
         <div class="accordion-item" onclick="toggleFAQ(this)" data-aos="fade-up">
             <div class="question">بشأن مواقف السيارات؟ <span>+</span></div>
-            <div class="answer">تتوفر خدمة صف السيارات (Valet) مجاناً لكل ضيوفنا الكرام أمام مدخل القاعة مباشرة.</div>
+            <div class="answer" style="max-height:0; overflow:hidden; transition:0.5s ease; color:#666;">تتوفر خدمة صف السيارات (Valet) مجاناً لكل ضيوفنا الكرام أمام مدخل القاعة مباشرة.</div>
         </div>
         <div class="accordion-item" onclick="toggleFAQ(this)" data-aos="fade-up" data-aos-delay="100">
             <div class="question">هل الأطفال مدعوون للحفل؟ <span>+</span></div>
-            <div class="answer">بقدر ما نحب ضجيجهم الصغير، قررنا أن يكون حفلنا "للكبار فقط" ليتسنى للجميع الاستمتاع بأجواء هادئة وراقية.</div>
+            <div class="answer" style="max-height:0; overflow:hidden; transition:0.5s ease; color:#666;">بقدر ما نحب ضجيجهم الصغير، سيكون الحفل مخصصاً للكبار ليتسنى للجميع الاستمتاع بأجواء هادئة وراقية.</div>
         </div>
         <div class="accordion-item" onclick="toggleFAQ(this)" data-aos="fade-up" data-aos-delay="200">
             <div class="question">قواعد اللباس (Dress Code)؟ <span>+</span></div>
-            <div class="answer">نتطلع لرؤيتكم بأبهى حلة، اللباس الرسمي الكامل (Black Tie) هو المعتمد لحفلنا.</div>
-        </div>
-        <div class="accordion-item" onclick="toggleFAQ(this)" data-aos="fade-up" data-aos-delay="300">
-            <div class="question">بخصوص التصوير والمشاركة؟ <span>+</span></div>
-            <div class="answer">نسعد بمشاركتكم لحظاتنا على وسائل التواصل، لكننا نرجو منكم أن تكونوا حاضرين معنا بقلوبكم أولاً بعيداً عن شاشات الهواتف خلال المراسم.</div>
+            <div class="answer" style="max-height:0; overflow:hidden; transition:0.5s ease; color:#666;">نتطلع لرؤيتكم بأبهى حلة، اللباس الرسمي الكامل هو المعتمد لحفلنا.</div>
         </div>
     </div>
 </section>
 
-<footer>
-    <div class="footer-logo serif">ل & ك</div>
+<footer style="padding:100px 20px; text-align:center; background:white; border-top:var(--luxury-border);">
+    <div class="footer-logo serif" style="font-size:2.8rem; background:var(--gold-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:25px;">ل & ك</div>
     <p style="font-weight: 500; color: var(--dark-gold);">ننتظركم بكل شوق لمشاركتنا ليلة العمر</p>
     <p style="margin-top: 15px; font-size: 0.85rem; opacity: 0.6;">صنع بكل حب لتاريخ ٢ مايو ٢٠٢٦</p>
 </footer>
 
 <script>
-    // AOS Initialization
-    AOS.init({
-        duration: 1200,
-        once: true,
-        easing: 'ease-out-back'
-    });
+    AOS.init({ duration: 1000, once: true, easing: 'ease-out-back' });
 
-    // Opening Screen Handler
     function openInvitation() {
-        const screen = document.getElementById('opening-screen');
-        screen.classList.add('screen-up');
-        
+        document.getElementById('opening-screen').classList.add('screen-up');
         const duration = 3 * 1000;
         const animationEnd = Date.now() + duration;
         const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-        function randomInRange(min, max) {
-          return Math.random() * (max - min) + min;
-        }
-
         const interval = setInterval(function() {
-          const timeLeft = animationEnd - Date.now();
-          if (timeLeft <= 0) return clearInterval(interval);
-          const particleCount = 50 * (timeLeft / duration);
-          confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }, colors: ['#C5A059', '#FDFBF7'] }));
-          confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }, colors: ['#C5A059', '#FDFBF7'] }));
+            const timeLeft = animationEnd - Date.now();
+            if (timeLeft <= 0) return clearInterval(interval);
+            const particleCount = 50 * (timeLeft / duration);
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random() * 0.2, y: Math.random() - 0.2 }, colors: ['#C5A059', '#FDFBF7'] }));
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random() * 0.2 + 0.8, y: Math.random() - 0.2 }, colors: ['#C5A059', '#FDFBF7'] }));
         }, 250);
     }
 
-    // Timer Functionality with Micro-Interactions
     const weddingDate = new Date("May 2, 2026 18:00:00").getTime();
     const arabicNumbers = (n) => n.toLocaleString('ar-EG');
-    let lastTime = {};
-
     function updateTimer() {
         const now = new Date().getTime();
         const distance = weddingDate - now;
-
-        if (distance < 0) {
-            const container = document.querySelector(".countdown-container");
-            if(container) container.style.display = "none";
-            return;
-        }
-
-        const times = {
-            days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-            hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-            minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-            seconds: Math.floor((distance % (1000 * 60)) / 1000)
-        };
-
-        for (const unit in times) {
-            const el = document.getElementById(unit);
-            const val = arabicNumbers(times[unit]);
-            if (lastTime[unit] !== val) {
-                el.innerHTML = val;
-                el.classList.remove('number-tick');
-                void el.offsetWidth; // Trigger reflow
-                el.classList.add('number-tick');
-                lastTime[unit] = val;
-            }
-        }
+        if (distance < 0) return;
+        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById("days").innerHTML = arabicNumbers(d);
+        document.getElementById("hours").innerHTML = arabicNumbers(h);
+        document.getElementById("minutes").innerHTML = arabicNumbers(m);
+        document.getElementById("seconds").innerHTML = arabicNumbers(s);
     }
     setInterval(updateTimer, 1000);
     updateTimer();
 
-    // FAQ Toggle
     function toggleFAQ(element) {
-        const isActive = element.classList.contains('active');
-        document.querySelectorAll('.accordion-item').forEach(item => item.classList.remove('active'));
-        if (!isActive) element.classList.add('active');
+        const answer = element.querySelector('.answer');
+        const isActive = element.classList.toggle('active');
+        answer.style.maxHeight = isActive ? "200px" : "0";
+        answer.style.paddingTop = isActive ? "20px" : "0";
+        element.querySelector('span').innerHTML = isActive ? "−" : "+";
     }
 
-    // IMPROVED PREMIUM HEART SYSTEM (Performance + Cinematic)
-    const MAX_HEARTS = 35;
+    const MAX_HEARTS = 15;
     let heartCount = 0;
-
     function createHeart() {
         if (heartCount >= MAX_HEARTS) {
             const oldest = document.querySelector('.heart');
             if (oldest) { oldest.remove(); heartCount--; }
         }
-
         const heart = document.createElement('div');
         heart.classList.add('heart');
         heart.innerHTML = '❤';
-        
-        const layerRoll = Math.random();
-        let scale, duration, opacity, drift, blur, glow;
-
-        if (layerRoll < 0.4) { // Background Layer (Small/Blurred)
-            scale = 0.4 + Math.random() * 0.3;
-            duration = 9 + Math.random() * 4;
-            opacity = 0.3 + Math.random() * 0.2;
-            drift = (Math.random() - 0.5) * 100;
-            blur = "1px";
-            glow = "none";
-        } else if (layerRoll < 0.8) { // Mid Layer (Normal)
-            scale = 0.8 + Math.random() * 0.4;
-            duration = 6 + Math.random() * 3;
-            opacity = 0.5 + Math.random() * 0.2;
-            drift = (Math.random() - 0.5) * 180;
-            blur = "0";
-            glow = "none";
-        } else { // Foreground Layer (Bright/Glow)
-            scale = 1.2 + Math.random() * 0.5;
-            duration = 4 + Math.random() * 2;
-            opacity = 0.7 + Math.random() * 0.2;
-            drift = (Math.random() - 0.5) * 280;
-            blur = "0";
-            glow = "0 0 10px rgba(197, 160, 89, 0.5)";
-        }
-
-        const left = Math.random() * 98;
-        const rotation = (Math.random() - 0.5) * 360;
-
-        heart.style.cssText = `
-            left: ${left}vw;
-            bottom: -10vh;
-            font-size: 16px;
-            filter: blur(${blur});
-            text-shadow: ${glow};
-            animation-duration: ${duration}s;
-            animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
-            --max-opacity: ${opacity};
-            --drift: ${drift}px;
-            --rot: ${rotation}deg;
-            --scale: ${scale};
-        `;
-        
+        const duration = 8 + Math.random() * 3;
+        heart.style.cssText = `left: ${Math.random() * 95}vw; bottom: -10vh; font-size: 15px; animation-duration: ${duration}s; --drift: ${(Math.random() - 0.5) * 80}px; --rot: ${Math.random() * 360}deg;`;
         document.body.appendChild(heart);
         heartCount++;
-        
-        setTimeout(() => {
-            if (heart.parentNode) {
-                heart.remove();
-                heartCount--;
-            }
-        }, duration * 1000);
+        setTimeout(() => { if (heart.parentNode) { heart.remove(); heartCount--; } }, duration * 1000);
     }
-
-    // Increased Spawn Frequency (Idle: 500-700ms)
-    const idleInterval = () => {
-        createHeart();
-        setTimeout(idleInterval, 500 + Math.random() * 200);
-    };
-    idleInterval();
-
-    // Scroll Spawn (3-4 hearts)
-    let isScrolling;
-    window.addEventListener('scroll', () => {
-        window.clearTimeout(isScrolling);
-        isScrolling = setTimeout(() => {
-            for (let i = 0; i < 3; i++) {
-                setTimeout(createHeart, i * 250);
-            }
-        }, 150);
-    }, { passive: true });
+    setInterval(createHeart, 1500);
 </script>
 </body>
 </html>
