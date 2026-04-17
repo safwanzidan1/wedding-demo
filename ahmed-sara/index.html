@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══════════════════════════════════════════
+       EDIT: Page title
+  ════════════════════════════════════════════ -->
+  <title>Sofia & Alexander — 20 September 2025</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- AOS Animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  <style>
+    /* ═══════════════════════════════════════════
+       DESIGN TOKENS — EDIT PALETTE HERE
+    ════════════════════════════════════════════ */
+    :root {
+      --cream:        #faf7f2;
+      --cream-deep:   #f3ede3;
+      --cream-mid:    #ede5d8;
+      --beige:        #e8dfd0;
+      --stone:        #c8bfb0;
+      --gold:         #b89a5e;
+      --gold-light:   #d4b97a;
+      --gold-pale:    #efe3c6;
+      --gold-muted:   #9e8550;
+      --ink:          #1a1714;
+      --ink-soft:     #2e2a24;
+      --ink-mid:      #5a5046;
+      --ink-light:    #8a7e6e;
+
+      --font-display: 'Playfair Display', serif;
+      --font-serif:   'Cormorant', serif;
+      --font-sans:    'Jost', sans-serif;
+
+      --shadow-sm:    0 2px 20px rgba(90,70,40,0.06);
+      --shadow-md:    0 8px 40px rgba(90,70,40,0.10);
+      --shadow-lg:    0 20px 80px rgba(90,70,40,0.14);
+
+      --radius:       2px;
+      --transition:   0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    /* ─── SHARED COMPONENTS ─── */
+    .eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    .section-title em { font-style: italic; color: var(--gold-muted); }
+
+    .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--gold);
+    }
+    .ornament::before,
+    .ornament::after {
+      content: '';
+      flex: 1;
+      max-width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-light));
+    }
+    .ornament::after { background: linear-gradient(90deg, var(--gold-light), transparent); }
+    .ornament span {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--gold-light);
+    }
+
+    .section-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section { position: relative; }
+
+    /* ═══════════════════════════════════════════
+       LOADER
+    ════════════════════════════════════════════ */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--cream);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      transition: opacity 0.9s ease, visibility 0.9s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; }
+
+    .loader-names {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ink);
+      text-align: center;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      animation: loaderFade 0.8s ease 0.2s both;
+    }
+    .loader-names .amp {
+      display: block;
+      font-size: 0.38em;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin: 0.2em 0;
+      font-style: normal;
+      font-family: var(--font-sans);
+      font-weight: 200;
+    }
+
+    .loader-bar-wrap {
+      width: min(220px, 55vw);
+      height: 1px;
+      background: var(--beige);
+      position: relative;
+      overflow: hidden;
+    }
+    .loader-bar {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      width: 0%;
+      animation: loaderBar 1.8s ease-in-out 0.3s forwards;
+    }
+    .loader-text {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--stone);
+      animation: loaderFade 0.8s ease 0.5s both;
+    }
+
+    @keyframes loaderFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @keyframes loaderBar  { from { width: 0%; } to { width: 100%; } }
+
+    /* ═══════════════════════════════════════════
+       NAVIGATION
+    ════════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 500;
+      padding: 1.6rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background var(--transition), padding var(--transition), box-shadow var(--transition);
+    }
+    nav.scrolled {
+      background: rgba(250,247,242,0.96);
+      backdrop-filter: blur(12px);
+      padding: 1rem 3rem;
+      box-shadow: 0 1px 0 rgba(184,154,94,0.15);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+    .nav-links a {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      position: relative;
+      transition: color var(--transition);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--gold-muted); }
+    .nav-links a:hover::after { width: 100%; }
+
+    @media (max-width: 680px) {
+      nav { padding: 1.2rem 1.5rem; }
+      nav.scrolled { padding: 0.8rem 1.5rem; }
+      .nav-links { display: none; }
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════════ */
+    #hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Left panel — text */
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 4rem 6rem 6rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: heroFadeUp 1s ease 1.8s forwards;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 40px; height: 1px;
+      background: var(--gold);
+    }
+    .hero-eyebrow span {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-names {
+      font-family: var(--font-display);
+      font-size: clamp(3.8rem, 7vw, 6.5rem);
+      font-weight: 400;
+      line-height: 0.95;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: heroFadeUp 1.2s ease 2s forwards;
+    }
+    .hero-names .name-2 {
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+    .hero-names .amp {
+      display: block;
+      font-size: 0.28em;
+      font-style: normal;
+      font-family: var(--font-sans);
+      font-weight: 200;
+      letter-spacing: 0.5em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin: 0.6em 0;
+    }
+
+    .hero-date-line {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: heroFadeUp 1s ease 2.3s forwards;
+    }
+    .hero-date-line::after {
+      content: '';
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--beige);
+    }
+    .hero-date-text {
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+    }
+
+    .hero-location-text {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--ink-mid);
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: heroFadeUp 1s ease 2.5s forwards;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold-muted);
+      opacity: 0;
+      animation: heroFadeUp 1s ease 2.7s forwards;
+      transition: gap var(--transition), color var(--transition);
+    }
+    .hero-cta::after {
+      content: '';
+      width: 36px; height: 1px;
+      background: var(--gold);
+      transition: width var(--transition);
+    }
+    .hero-cta:hover { color: var(--gold); gap: 1.5rem; }
+    .hero-cta:hover::after { width: 52px; }
+
+    /* Right panel — image */
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-img-wrap {
+      position: absolute;
+      inset: 0;
+      /* EDIT: Replace with your hero image URL */
+      background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80');
+      background-size: cover;
+      background-position: center 30%;
+      transform: scale(1.06);
+      animation: heroZoom 8s ease-out 1.5s forwards;
+    }
+    .hero-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(250,247,242,0.35) 0%, transparent 40%),
+        linear-gradient(to top, rgba(250,247,242,0.2) 0%, transparent 30%);
+    }
+
+    /* Floating date badge */
+    .hero-badge {
+      position: absolute;
+      bottom: 3.5rem;
+      left: -3.5rem;
+      background: var(--cream);
+      padding: 1.8rem 2.2rem;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      z-index: 3;
+      opacity: 0;
+      animation: heroFadeUp 1s ease 2.8s forwards;
+      border: 1px solid var(--gold-pale);
+    }
+    .hero-badge-month {
+      font-family: var(--font-sans);
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+    .hero-badge-day {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .hero-badge-year {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      color: var(--ink-light);
+      margin-top: 0.3rem;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: heroFadeUp 1s ease 3.2s forwards;
+      z-index: 3;
+    }
+    .scroll-indicator span {
+      font-family: var(--font-sans);
+      font-size: 0.52rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    .scroll-mouse {
+      width: 22px; height: 36px;
+      border: 1px solid var(--stone);
+      border-radius: 12px;
+      position: relative;
+    }
+    .scroll-mouse::before {
+      content: '';
+      position: absolute;
+      top: 6px; left: 50%;
+      transform: translateX(-50%);
+      width: 2px; height: 6px;
+      background: var(--gold);
+      border-radius: 1px;
+      animation: scrollBob 1.6s ease-in-out infinite;
+    }
+    @keyframes scrollBob {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+      70% { transform: translateX(-50%) translateY(8px); opacity: 0; }
+    }
+
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.06); }
+      to   { transform: scale(1); }
+    }
+
+    /* Mobile hero */
+    @media (max-width: 768px) {
+      #hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 55vw;
+      }
+      .hero-left {
+        padding: 7rem 2rem 2rem;
+        order: 1;
+      }
+      .hero-right { order: 2; }
+      .hero-badge { left: 1.5rem; bottom: -3.5rem; }
+      .hero-names { font-size: clamp(3rem, 11vw, 5rem); }
+    }
+
+    /* ═══════════════════════════════════════════
+       COUNTDOWN
+    ════════════════════════════════════════════ */
+    #countdown {
+      padding: 7rem 2rem;
+      background: var(--cream);
+    }
+    .countdown-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .countdown-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 1.5rem 0 3.5rem;
+    }
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(1rem, 4vw, 3rem);
+      flex-wrap: wrap;
+    }
+    .cd-unit {
+      text-align: center;
+      min-width: 90px;
+    }
+    .cd-box {
+      background: var(--cream);
+      border: 1px solid var(--gold-pale);
+      box-shadow: var(--shadow-sm);
+      padding: 1.5rem 0.5rem 1.2rem;
+      margin-bottom: 0.8rem;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .cd-box:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .cd-box::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    }
+    .cd-number {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 400;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .cd-label {
+      font-family: var(--font-sans);
+      font-size: 0.55rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    .cd-sep {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--gold-pale);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       OUR STORY
+    ════════════════════════════════════════════ */
+    #story {
+      padding: 8rem 2rem;
+      background: var(--cream-deep);
+    }
+    .story-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .story-image-col { position: relative; }
+    .story-img-main {
+      width: 100%;
+      aspect-ratio: 3/4;
+      /* EDIT: Replace with your story/couple image */
+      background: url('https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80') center/cover;
+      box-shadow: var(--shadow-lg);
+    }
+    .story-img-accent {
+      position: absolute;
+      width: 55%;
+      aspect-ratio: 4/3;
+      /* EDIT: Replace with a second couple image */
+      background: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80') center/cover;
+      box-shadow: var(--shadow-md);
+      bottom: -2.5rem;
+      right: -2.5rem;
+      border: 6px solid var(--cream);
+    }
+
+    .story-text-col { }
+    .story-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink);
+      margin: 1.5rem 0;
+    }
+    .story-heading em { font-style: italic; color: var(--gold-muted); }
+
+    .story-body {
+      font-family: var(--font-serif);
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--ink-mid);
+    }
+    .story-body p + p { margin-top: 1.4rem; }
+
+    /* Timeline */
+    .story-timeline {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .timeline-item {
+      display: flex;
+      gap: 1.5rem;
+      position: relative;
+      padding-bottom: 1.8rem;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 16px;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold-pale), transparent);
+    }
+    .timeline-dot {
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 1.5px solid var(--gold);
+      flex-shrink: 0;
+      margin-top: 4px;
+      box-shadow: 0 0 0 3px var(--gold-pale);
+    }
+    .timeline-content {}
+    .timeline-year {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+    .timeline-text {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--ink-mid);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .story-inner { grid-template-columns: 1fr; gap: 3.5rem; }
+      .story-image-col { max-width: 420px; margin: 0 auto; }
+      .story-img-accent { right: -1rem; bottom: -1.5rem; }
+    }
+
+    /* ═══════════════════════════════════════════
+       GALLERY
+    ════════════════════════════════════════════ */
+    #gallery {
+      padding: 8rem 2rem;
+      background: var(--cream);
+    }
+    .gallery-header {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 4rem;
+    }
+    .gallery-header .section-title { margin: 1rem 0; }
+
+    .gallery-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 260px 320px;
+      gap: 10px;
+    }
+    .g-item {
+      overflow: hidden;
+      cursor: zoom-in;
+      position: relative;
+    }
+    .g-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(26,23,20,0);
+      transition: background var(--transition);
+    }
+    .g-item:hover::after { background: rgba(26,23,20,0.08); }
+    .g-item img,
+    .g-item .g-placeholder {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .g-item .g-placeholder {
+      background: var(--cream-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--stone);
+    }
+    .g-item:hover img,
+    .g-item:hover .g-placeholder { transform: scale(1.04); }
+
+    /* Grid layout — asymmetric luxury */
+    .g-item:nth-child(1) { grid-column: 1 / 6;  grid-row: 1; }
+    .g-item:nth-child(2) { grid-column: 6 / 9;  grid-row: 1; }
+    .g-item:nth-child(3) { grid-column: 9 / 13; grid-row: 1; }
+    .g-item:nth-child(4) { grid-column: 1 / 5;  grid-row: 2; }
+    .g-item:nth-child(5) { grid-column: 5 / 10; grid-row: 2; }
+    .g-item:nth-child(6) { grid-column: 10/ 13; grid-row: 2; }
+
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 240px);
+        gap: 6px;
+      }
+      .g-item { grid-column: auto !important; grid-row: auto !important; }
+      .g-item:nth-child(1) { grid-column: 1 / 3 !important; }
+    }
+    @media (max-width: 500px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, 220px);
+      }
+      .g-item:nth-child(1) { grid-column: auto !important; }
+    }
+
+    /* ═══════════════════════════════════════════
+       PARALLAX SECTION
+    ════════════════════════════════════════════ */
+    #parallax-quote {
+      position: relative;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .parallax-bg {
+      position: absolute;
+      inset: -15%;
+      /* EDIT: Replace with a beautiful wide landscape or romantic image */
+      background-image: url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1800&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      filter: brightness(0.55);
+    }
+    .parallax-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(250,247,242,0.15) 0%,
+        rgba(26,23,20,0.35) 50%,
+        rgba(250,247,242,0.15) 100%);
+    }
+    .parallax-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+      max-width: 680px;
+    }
+    .parallax-quote-mark {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      line-height: 0.6;
+      color: var(--gold-light);
+      opacity: 0.7;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .parallax-quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      font-weight: 400;
+      font-style: italic;
+      color: #fff;
+      line-height: 1.4;
+      letter-spacing: 0.01em;
+      margin-bottom: 1.8rem;
+    }
+    /* EDIT: Change the quote below */
+    .parallax-attribution {
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+    }
+
+    /* ═══════════════════════════════════════════
+       LOCATION
+    ════════════════════════════════════════════ */
+    #location {
+      padding: 8rem 2rem;
+      background: var(--cream-deep);
+    }
+    .location-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .location-header {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 4rem;
+    }
+    .location-header .section-title { margin: 1rem 0; }
+
+    .location-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5px;
+      background: var(--beige);
+      margin-bottom: 3.5rem;
+      border: 1px solid var(--beige);
+    }
+    .loc-card {
+      background: var(--cream);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: background var(--transition);
+    }
+    .loc-card:hover { background: var(--cream-mid); }
+    .loc-icon {
+      font-size: 1.4rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .loc-label {
+      font-family: var(--font-sans);
+      font-size: 0.55rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 0.5rem;
+    }
+    .loc-value {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    .map-container {
+      position: relative;
+      border: 1px solid var(--gold-pale);
+      overflow: hidden;
+    }
+    .map-container iframe {
+      display: block;
+      width: 100%;
+      height: 420px;
+      border: none;
+      filter: sepia(25%) saturate(0.9) brightness(1.05) contrast(0.95);
+    }
+    .map-open-btn {
+      position: absolute;
+      bottom: 1.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 2rem;
+      background: var(--cream);
+      border: 1px solid var(--gold);
+      color: var(--gold-muted);
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow-md);
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+      white-space: nowrap;
+    }
+    .map-open-btn:hover {
+      background: var(--gold);
+      color: #fff;
+      box-shadow: var(--shadow-lg);
+    }
+    .map-open-btn svg { transition: transform var(--transition); }
+    .map-open-btn:hover svg { transform: translateX(3px); }
+
+    /* ═══════════════════════════════════════════
+       RSVP
+    ════════════════════════════════════════════ */
+    #rsvp {
+      padding: 9rem 2rem;
+      background: var(--cream);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Soft decorative circle */
+    #rsvp::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-pale);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    #rsvp::after {
+      content: '';
+      position: absolute;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      border: 1px solid var(--beige);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .rsvp-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .rsvp-inner .section-title { margin: 1.2rem 0; }
+
+    .rsvp-message {
+      font-family: var(--font-serif);
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      font-style: italic;
+      color: var(--ink-mid);
+      line-height: 1.85;
+      margin: 2rem 0;
+      font-weight: 300;
+    }
+
+    .rsvp-deadline-box {
+      display: inline-block;
+      border: 1px solid var(--gold-pale);
+      padding: 1rem 2.5rem;
+      margin: 1rem 0 2.5rem;
+      background: var(--cream-deep);
+    }
+    .rsvp-deadline-label {
+      font-family: var(--font-sans);
+      font-size: 0.52rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 0.3rem;
+    }
+    .rsvp-deadline-date {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--ink);
+    }
+
+    .rsvp-note {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: var(--stone);
+      margin-top: 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* Decorative floral divider (SVG inline) */
+    .floral-divider {
+      color: var(--gold-light);
+      margin: 1.5rem 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════ */
+    footer {
+      background: var(--ink);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .footer-names {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold-light);
+      letter-spacing: 0.02em;
+      margin-bottom: 0.8rem;
+    }
+    .footer-date {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 2rem;
+    }
+    .footer-line {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dark, #9a7a2e), transparent);
+      margin: 0 auto 1.5rem;
+    }
+    .footer-love {
+      font-family: var(--font-serif);
+      font-size: 0.85rem;
+      font-style: italic;
+      color: #4a4036;
+    }
+
+    /* ═══════════════════════════════════════════
+       LIGHTBOX
+    ════════════════════════════════════════════ */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26,23,20,0.96);
+      z-index: 9000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      box-shadow: 0 30px 100px rgba(0,0,0,0.5);
+    }
+    .lb-close {
+      position: absolute;
+      top: 2rem; right: 2.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.55rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--stone);
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .lb-close:hover { color: var(--gold-light); }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     LOADER
+════════════════════════════════════════ -->
+<div id="loader">
+  <!-- EDIT: Names in loader -->
+  <div class="loader-names">
+    Sofia
+    <span class="amp">& Alexander</span>
+  </div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <p class="loader-text">20 · September · 2025</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     LIGHTBOX
+════════════════════════════════════════ -->
+<div id="lightbox" role="dialog" aria-modal="true">
+  <img src="" alt="" id="lb-img" />
+  <div class="lb-close" id="lb-close">✕ &nbsp; Close</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════ -->
+<nav id="site-nav">
+  <!-- EDIT: Nav logo initials -->
+  <a href="#hero" class="nav-logo">S & A</a>
+  <ul class="nav-links">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#location">Venue</a></li>
+    <li><a href="#rsvp">RSVP</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO SECTION
+     EDIT: names, date, venue, hero image (in CSS .hero-img-wrap background-image)
+════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span>We Are Getting Married</span></div>
+
+    <h1 class="hero-names">
+      Sofia<!-- EDIT: Name 1 -->
+      <span class="amp">&amp;</span>
+      <span class="name-2">Alexander</span><!-- EDIT: Name 2 -->
+    </h1>
+
+    <!-- EDIT: Date text -->
+    <div class="hero-date-line">
+      <span class="hero-date-text">Saturday · 20 September 2025</span>
+    </div>
+
+    <!-- EDIT: Venue & city -->
+    <p class="hero-location-text">Villa Rosaria, Lake Como, Italy</p>
+
+    <a href="#story" class="hero-cta">Discover Our Story</a>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-img-wrap"></div>
+    <!-- EDIT: date badge values -->
+    <div class="hero-badge">
+      <p class="hero-badge-month">September</p>
+      <p class="hero-badge-day">20</p>
+      <p class="hero-badge-year">2025</p>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-mouse"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     COUNTDOWN
+════════════════════════════════════════ -->
+<section id="countdown">
+  <div class="countdown-inner">
+    <p class="eyebrow" data-aos="fade-up">The Big Day</p>
+    <p class="countdown-title" data-aos="fade-up" data-aos-delay="80">Every moment until we say <em>"I do"</em></p>
+
+    <div class="countdown-grid" data-aos="fade-up" data-aos-delay="160">
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-number" id="cd-days">00</span></div>
+        <span class="cd-label">Days</span>
+      </div>
+      <div class="cd-sep">·</div>
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-number" id="cd-hours">00</span></div>
+        <span class="cd-label">Hours</span>
+      </div>
+      <div class="cd-sep">·</div>
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-number" id="cd-mins">00</span></div>
+        <span class="cd-label">Minutes</span>
+      </div>
+      <div class="cd-sep">·</div>
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-number" id="cd-secs">00</span></div>
+        <span class="cd-label">Seconds</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     OUR STORY
+     EDIT: Text, images (in CSS background-image URLs)
+════════════════════════════════════════ -->
+<section id="story">
+  <div class="story-inner">
+    <div class="story-image-col" data-aos="fade-right" data-aos-duration="900">
+      <div class="story-img-main"></div>
+      <div class="story-img-accent"></div>
+    </div>
+
+    <div class="story-text-col">
+      <p class="eyebrow" data-aos="fade-up">Our Story</p>
+      <h2 class="story-heading" data-aos="fade-up" data-aos-delay="80">
+        A Love That Began<br>With <em>One Glance</em>
+        <!-- EDIT: Story heading -->
+      </h2>
+      <div class="ornament" data-aos="fade-up" data-aos-delay="120">
+        <span>✦</span>
+      </div>
+
+      <!-- EDIT: Your love story paragraphs -->
+      <div class="story-body" data-aos="fade-up" data-aos-delay="160">
+        <p>
+          It began with a chance encounter at a gallery opening in Florence — a shared glance over
+          a Caravaggio painting, a borrowed umbrella in the rain, and a conversation that lasted
+          until the last café closed its doors.
+        </p>
+        <p>
+          Neither of us had expected to find something so quietly extraordinary in an ordinary
+          evening. Two years, countless adventures, and one proposal on the shores of Lake Como
+          later, we are ready to begin our forever.
+        </p>
+      </div>
+
+      <!-- EDIT: Timeline milestones — year & event -->
+      <div class="story-timeline" data-aos="fade-up" data-aos-delay="220">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <p class="timeline-year">October 2021</p>
+            <p class="timeline-text">We met at a rainy gallery opening in Florence.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <p class="timeline-year">June 2023</p>
+            <p class="timeline-text">Alexander proposed at sunrise over Lake Como.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <p class="timeline-year">September 2025</p>
+            <p class="timeline-text">We say "I do" — forever begins here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     GALLERY
+     EDIT: Replace .g-placeholder divs with <img src="..."> tags
+════════════════════════════════════════ -->
+<section id="gallery">
+  <div class="gallery-header">
+    <p class="eyebrow" data-aos="fade-up">Gallery</p>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Our <em>Moments</em></h2>
+    <div class="ornament" data-aos="fade-up" data-aos-delay="120"><span>✦</span></div>
+  </div>
+
+  <div class="gallery-grid">
+    <!-- EDIT: Replace each .g-placeholder div with <img src="your-photo.jpg" alt="..."> -->
+    <div class="g-item" data-aos="fade-up" data-aos-delay="50">
+      <div class="g-placeholder">Engagement Photo</div>
+    </div>
+    <div class="g-item" data-aos="fade-up" data-aos-delay="100">
+      <div class="g-placeholder">Photo 2</div>
+    </div>
+    <div class="g-item" data-aos="fade-up" data-aos-delay="150">
+      <div class="g-placeholder">Photo 3</div>
+    </div>
+    <div class="g-item" data-aos="fade-up" data-aos-delay="80">
+      <div class="g-placeholder">Photo 4</div>
+    </div>
+    <div class="g-item" data-aos="fade-up" data-aos-delay="130">
+      <div class="g-placeholder">Lake Como</div>
+    </div>
+    <div class="g-item" data-aos="fade-up" data-aos-delay="180">
+      <div class="g-placeholder">Photo 6</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PARALLAX QUOTE SECTION
+     EDIT: background image (CSS .parallax-bg), quote text
+════════════════════════════════════════ -->
+<section id="parallax-quote">
+  <div class="parallax-bg"></div>
+  <div class="parallax-overlay"></div>
+  <div class="parallax-content" data-aos="zoom-in" data-aos-duration="900">
+    <span class="parallax-quote-mark">"</span>
+    <!-- EDIT: Quote -->
+    <p class="parallax-quote-text">
+      You are my today and all of my tomorrows.
+    </p>
+    <p class="parallax-attribution">— Leo Christopher</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     LOCATION / VENUE
+     EDIT: Venue name, date, times, address, Google Maps src
+════════════════════════════════════════ -->
+<section id="location">
+  <div class="location-inner">
+    <div class="location-header">
+      <p class="eyebrow" data-aos="fade-up">Venue</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Where to <em>Find Us</em></h2>
+      <div class="ornament" data-aos="fade-up" data-aos-delay="120"><span>✦</span></div>
+    </div>
+
+    <!-- EDIT: Venue details -->
+    <div class="location-cards" data-aos="fade-up" data-aos-delay="160">
+      <div class="loc-card">
+        <span class="loc-icon">⌂</span>
+        <p class="loc-label">Venue</p>
+        <p class="loc-value">Villa Rosaria<br>Lake Como</p>
+      </div>
+      <div class="loc-card">
+        <span class="loc-icon">◈</span>
+        <p class="loc-label">Date</p>
+        <p class="loc-value">Saturday<br>20 September 2025</p>
+      </div>
+      <div class="loc-card">
+        <span class="loc-icon">◷</span>
+        <p class="loc-label">Ceremony</p>
+        <p class="loc-value">4:00 PM</p>
+      </div>
+      <div class="loc-card">
+        <span class="loc-icon">◈</span>
+        <p class="loc-label">Reception</p>
+        <p class="loc-value">6:30 PM<br>onwards</p>
+      </div>
+    </div>
+
+    <div class="map-container" data-aos="fade-up" data-aos-delay="200">
+      <!--
+        EDIT: Replace the Google Maps embed src below.
+        1. Go to maps.google.com and find your venue
+        2. Click Share → Embed a map → Copy HTML
+        3. Paste only the src="..." value here
+      -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d88617.76399267!2d9.1488!3d46.0162!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4785019500000001%3A0x1!2sLake+Como%2C+Italy!5e0!3m2!1sen!2sit!4v1680000000000"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Wedding venue location"
+      ></iframe>
+
+      <!--
+        EDIT: Replace href with a Google Maps link to your venue.
+        Format: https://www.google.com/maps/search/?api=1&query=YOUR+VENUE+NAME
+      -->
+      <a
+        href="https://www.google.com/maps/search/?api=1&query=Lake+Como+Italy"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="map-open-btn"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+        </svg>
+        Open in Google Maps
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     RSVP SECTION
+     EDIT: Message, deadline, contact info text
+════════════════════════════════════════ -->
+<section id="rsvp">
+  <div class="rsvp-inner">
+    <p class="eyebrow" data-aos="fade-up">RSVP</p>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">
+      Will You <em>Join Us?</em>
+    </h2>
+
+    <div class="floral-divider" data-aos="fade-up" data-aos-delay="120">
+      <svg width="180" height="30" viewBox="0 0 180 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="15" x2="65" y2="15" stroke="currentColor" stroke-opacity="0.4"/>
+        <circle cx="72" cy="15" r="3" fill="currentColor" opacity="0.5"/>
+        <circle cx="90" cy="15" r="5" fill="currentColor" opacity="0.8"/>
+        <circle cx="108" cy="15" r="3" fill="currentColor" opacity="0.5"/>
+        <line x1="115" y1="15" x2="180" y2="15" stroke="currentColor" stroke-opacity="0.4"/>
+        <circle cx="90" cy="15" r="9" stroke="currentColor" stroke-opacity="0.3"/>
+      </svg>
+    </div>
+
+    <!-- EDIT: RSVP message -->
+    <p class="rsvp-message" data-aos="fade-up" data-aos-delay="160">
+      Your presence would be the greatest gift we could receive. We kindly request that you
+      let us know whether you will be joining us for this very special celebration of love.
+    </p>
+
+    <!-- EDIT: RSVP deadline -->
+    <div class="rsvp-deadline-box" data-aos="fade-up" data-aos-delay="200">
+      <p class="rsvp-deadline-label">Kindly respond before</p>
+      <p class="rsvp-deadline-date">1st August 2025</p>
+    </div>
+
+    <!-- EDIT: Contact info shown to guests -->
+    <p class="rsvp-note" data-aos="fade-up" data-aos-delay="240">
+      For questions or to confirm your attendance, please reach out to<br>
+      <strong style="color:var(--ink-mid); font-weight:400;">events@sofia-alexander.com</strong>
+      <!-- EDIT: Replace with your contact email or phone -->
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <!-- EDIT: Names & date -->
+  <p class="footer-names">Sofia & Alexander</p>
+  <p class="footer-date">20 · September · 2025 · Lake Como, Italy</p>
+  <div class="footer-line"></div>
+  <p class="footer-love">Made with love, for love.</p>
+</footer>
+
+<!-- AOS Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<script>
+  /* ─────────────────────────────────────────
+     LOADER
+  ───────────────────────────────────────── */
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+      document.body.style.overflow = '';
+      AOS.init({
+        duration: 800,
+        easing: 'ease-out-quad',
+        once: true,
+        offset: 60,
+      });
+    }, 2200);
+  });
+  document.body.style.overflow = 'hidden';
+
+  /* ─────────────────────────────────────────
+     COUNTDOWN
+     EDIT: Change wedding date/time here
+  ───────────────────────────────────────── */
+  const WEDDING_DATE = new Date('2025-09-20T16:00:00');
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const diff = WEDDING_DATE - new Date();
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
+      return;
+    }
+    document.getElementById('cd-days').textContent  = pad(Math.floor(diff / 86400000));
+    document.getElementById('cd-hours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
+    document.getElementById('cd-mins').textContent  = pad(Math.floor((diff % 3600000)  / 60000));
+    document.getElementById('cd-secs').textContent  = pad(Math.floor((diff % 60000)    / 1000));
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ─────────────────────────────────────────
+     NAV SCROLL EFFECT
+  ───────────────────────────────────────── */
+  const nav = document.getElementById('site-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ─────────────────────────────────────────
+     GALLERY LIGHTBOX
+  ───────────────────────────────────────── */
+  const lightbox = document.getElementById('lightbox');
+  const lbImg    = document.getElementById('lb-img');
+
+  document.querySelectorAll('.g-item img').forEach(img => {
+    img.addEventListener('click', () => {
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLb() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => { lbImg.src = ''; }, 400);
+  }
+  document.getElementById('lb-close').addEventListener('click', closeLb);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLb(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+  /* ─────────────────────────────────────────
+     PARALLAX (subtle, CSS fixed does heavy lifting)
+  ───────────────────────────────────────── */
+  // On mobile, disable fixed attachment (performance)
+  if (window.innerWidth < 768) {
+    document.querySelector('.parallax-bg').style.backgroundAttachment = 'scroll';
+  }
+</script>
+
+</body>
+</html>
